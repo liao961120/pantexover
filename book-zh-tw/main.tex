@@ -1,0 +1,48 @@
+%%%%%%% Pandoc preamble (don't touch) %%%%%%%%
+\input{style/pandoc-preamble.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%% Book Info %%%%%%%%%%%%
+\hypersetup{
+  pdftitle={A LaTeX Book Template for Scientific Publication},
+  pdfauthor={Yongfu Liao},
+  pdfsubject={LaTeX},
+  pdfkeywords={LaTex, Markdown, Pandoc},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{A LaTeX Book Template for Scientific Publication}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Designed for Pandoc \& Chinese Compatible}
+\author{Yongfu Liao}
+\date{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%% Custom Style tweaks %%%%%%%%%
+\input{style/custom.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\frontmatter
+\maketitle
+
+{
+  \setcounter{tocdepth}{1}
+  \tableofcontents
+}
+\mainmatter
+
+%%% Book Content (pandoc fragment, compiled from markdown) %%%%
+\input{content.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\printindex
+\backmatter
+\end{document}

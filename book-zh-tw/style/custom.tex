@@ -1,0 +1,171 @@
+%%%%%%% Packages %%%%%
+\usepackage[paper=b5paper, margin=0.9in]{geometry}
+\usepackage[heading, fontset = none]{ctex}  % Chinese typesetting
+\usepackage{fontspec}           % mainfont
+\usepackage{xeCJK}              % Chinese fonts
+\usepackage{fancyhdr}           % fancy header
+\usepackage[most]{tcolorbox}    % Custom box
+\usepackage[explicit]{titlesec}
+\usepackage{setspace}           % linestretch
+\usepackage{imakeidx}           % index
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%% Font Setup %%%%%%%%%%%%%
+% https://www.overleaf.com/learn/latex/Questions/Which_OTF_or_TTF_fonts_are_supported_via_fontspec%3F
+\setmainfont[]{Georgia}  % PT Serif
+\setsansfont[]{PT Sans}
+\setmonofont[]{Ubuntu Mono}
+\xeCJKsetup{AutoFallBack, CJKmath=true}
+\setCJKmainfont[
+    % ItalicFont={AR PL KaitiM Big5},
+    % AutoFakeSlant=0.1
+]{Noto Serif CJK TC}
+\setCJKsansfont{Noto Sans CJK TC}
+\setCJKmonofont[]{Noto Sans Mono CJK TC}
+% Custom fonts
+% \setCJKmainfont[Path=fonts/,AutoFakeBold=2.5,AutoFakeSlant=.3]{kaiti}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% 中文標題格式 %%%%%%%%%%%%%%%%%%%%%%
+%% Appendix toc alignment
+% https://tex.stackexchange.com/questions/7853/toc-text-numbers-alignment
+% \usepackage{tocloft}
+% \setlength{\cftchapnumwidth}{3em}
+\ctexset{
+    part/name = {第, 部分},
+    chapter/name = {第,章},
+    chapter/aftername = {
+        \\
+    },
+    % chapter/aftertitle = {
+    %      \vspace*{-2.19ex}\noindent\rule{\textwidth}{0.4pt}
+    % },
+    chapter/format = \Huge\bfseries\raggedright,
+    chapter/nameformat = \LARGE\bfseries\raggedright,
+    chapter/numberformat = \sffamily,
+    section/numberformat = \sffamily,
+    subsection/numberformat = \sffamily,
+    subsubsection/numberformat = \sffamily,
+    section/format = \Large\bfseries\raggedright,
+    chapter/number = \arabic{chapter},
+    % subsection/format += \fbox,
+    appendix/name={\appendixname\space}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%% Title names %%%%%%%%%%%%%%%%
+\renewcommand{\chaptername}{\CTEXthechapter}
+\renewcommand{\contentsname}{目錄}
+\renewcommand{\figurename}{圖}
+\renewcommand{\tablename}{表}
+\renewcommand{\listfigurename}{圖目錄}
+\renewcommand{\listtablename}{表目錄}
+\renewcommand{\appendixname}{附錄}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% Fancy header %%%%%%%%%%%%%%%%%%
+\makeatletter
+    \fancyhf{}
+    \fancyhead[EL]{\nouppercase\leftmark}
+    \fancyhead[OR]{\nouppercase\rightmark}
+    \fancyhead[ER,OL]{\thepage}
+    \pagestyle{fancy}
+    %% Patch for blank pages between chapters
+    %% which disables the current page style
+    \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+      \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%% Line numbering for all highlighted code chunks %%%%%
+% Overrides pandoc code chunk setup
+% ori: \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{
+    commandchars=\\\{\},
+    numbers=left,
+    frame=leftline,  % single, lines, leftline, topline
+    % xleftmargin=5.3mm,
+    numbersep=7pt,
+    % framerule=.4mm,
+    rulecolor=\color{gray}
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%% Globally change verbatim font size %%%%%%%%%%
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@verbatim}
+  {\verbatim@font}
+  {\verbatim@font\small}
+  {}{}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%% Custom Box %%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{mybox}[1]
+    {   
+        \vspace{12pt}
+        \begin{tcolorbox}[
+            enhanced, breakable,
+            colback=red!5!white, 
+            colframe=red!50!black, 
+            title=#1] }
+    {  \end{tcolorbox} }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%% Linestretch (Doesn't change footnotes) %%%%%%%%%%%%%%
+\setstretch{1.43}
+% Set independent linestretch for code & captions
+\let\oldShaded=\Shaded
+\let\endoldShaded=\endShaded
+\renewenvironment{Shaded}{
+    \begin{spacing}{1}\begin{oldShaded}
+  }
+  {
+  \end{oldShaded}
+  \end{spacing}
+  \vspace{0.1cm}
+  }
+\let\oldLongTable=\longtable
+  \let\endoldLongTable=\endlongtable
+  \renewenvironment{longtable}{
+      \begin{small}\begin{spacing}{1.1}\begin{oldLongTable}
+    }
+    {
+    \end{oldLongTable}\end{spacing}\end{small}
+    }
+\let\oldTable=\table
+  \let\endoldTable=\endtable
+  \renewenvironment{table}{
+    \begin{small}\begin{spacing}{1.1}\begin{oldTable}
+    }
+    {
+    \end{oldTable}\end{spacing}\end{small}
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%% Custom Section Styling %%%%%%
+% src: https://tex.stackexchange.com/questions/599059/fancy-chapter-style-custom
+\titleformat{\section}[display]
+  {\sffamily\large}
+  {}
+  {0pt}
+  {\hrule\vspace*{0.25ex}\parbox[b]{\dimexpr\textwidth\relax}{
+  \textcolor{darkgray}{\textbf{\thesection}}\quad\raggedright\bfseries#1}}
+  [\hrule]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% Index %%%%%%%%%%%%%%%%
+\makeindex[title=索引, intoc]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
