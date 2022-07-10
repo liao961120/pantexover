@@ -238,12 +238,20 @@ Stefanowitsch \& Gries, 2005; Stefanowitsch \& Gries, 2003)
 (賓語) \textbf{花} (動作) 在」。下方是「把」字句的 CQL
 結構，\texttt{{[}{]}} 內是在描述該詞\ldots{}
 
-上方這條搜尋語法裡面，定義了 3 個不同的 token： 1.
-\texttt{{[}word="把"\ \&\ pos="P"{]}} 「把」這個詞（P
-介詞，詳見\href{https://github.com/ckiplab/ckiptagger/wiki/POS-Tags}{中研院詞類表}）
-2. \texttt{{[}pos="N{[}abcd{]}.*"{]}} 名詞（以 \texttt{Na/Nb/Nc/Nd}
-開頭的詞類） 3. \texttt{{[}pos="V.*"{]}} 動詞（所有以 \texttt{V}
-開頭的詞類)
+上方這條搜尋語法裡面，定義了 3 個不同的 token：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{{[}word="把"\ \&\ pos="P"{]}} 「把」這個詞（P
+  介詞，詳見\href{https://github.com/ckiplab/ckiptagger/wiki/POS-Tags}{中研院詞類表}）
+\item
+  \texttt{{[}pos="N{[}abcd{]}.*"{]}} 名詞（以 \texttt{Na/Nb/Nc/Nd}
+  開頭的詞類）
+\item
+  \texttt{{[}pos="V.*"{]}} 動詞（所有以 \texttt{V} 開頭的詞類)
+\end{enumerate}
 
 語言複雜的程度總是超過我們的想像。事實上，上方的搜尋語法只能搜尋到\textbf{一部分的「把」字句}，因為它忽略了其它的可能，例如「\textbf{把}
 寶貴 的 \textbf{時間} \textbf{花} 在」這個把字句不符\ldots{}

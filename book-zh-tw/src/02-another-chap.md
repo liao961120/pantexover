@@ -29,6 +29,7 @@ pip install -U concordancer
 
 
 上方這條搜尋語法裡面，定義了 3 個不同的 token：
+
 1. `[word="把" & pos="P"]` 「把」這個詞（P 介詞，詳見[中研院詞類表][ckiptags]）
 2. `[pos="N[abcd].*"]` 名詞（以 `Na/Nb/Nc/Nd` 開頭的詞類）
 3. `[pos="V.*"]` 動詞（所有以 `V` 開頭的詞類)
